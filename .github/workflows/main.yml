@@ -41,6 +41,9 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
       - name: send message to discord
         uses: appleboy/discord-action@master
         with:
@@ -48,4 +51,4 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: "#48f442"
           username: "GitHub Bot"
-          message: "Deploy completado correctamente perreque"
+          message: "Deploy de la version ${{ steps.package-version.outputs.current-version}} completado correctamente perreque"
