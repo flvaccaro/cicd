@@ -1,5 +1,5 @@
 on:
-  pull_request:
+  push:
     branches:
     - '**'
 
@@ -17,4 +17,3 @@ jobs:
       run: npm ci
     - name: Build dependencies
       run: npm run build
-  
