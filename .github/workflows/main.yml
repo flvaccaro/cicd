@@ -1,7 +1,9 @@
+name: Run Tests
+
 on:
-  push:
+  pull_request:
     branches:
-    - pruebaPR4
+      - master
 
 jobs:
   pull-request:
