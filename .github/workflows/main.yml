@@ -1,8 +1,11 @@
 name: Build and deploy
 
 on:
-  push:
-    branches: [master]
+  pull_request:
+    branches:
+      - "master"
+  # push:
+  #   branches: [master]
 
   # Run workflow manually
   workflow_dispatch:
@@ -18,39 +21,39 @@ jobs:
         run: npm ci
       - name: Build dependencies
         run: npm run build
-      - name: Archive production artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: build
-          path: build
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@main
-      - name: Download artifact
-        uses: actions/download-artifact@main
-        with:
-          name: build
-          path: build
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
-        env:
-          LAST_VERSION: "${{ steps.package-version.outputs.current-version}}"
-      - name: send message to discord
-        uses: appleboy/discord-action@master
-        with:
-          webhook_id: ${{ secrets.WEBHOOK_ID }}
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          color: "#48f442"
-          username: "GitHub Bot"
-          message: " ${{ env.LAST_VERSION}} Deploy de la version ${{ steps.package-version.outputs.current-version}} completado correctamente perreque"
+      # - name: Archive production artifact
+      #   uses: actions/upload-artifact@main
+      #   with:
+      #     name: build
+      #     path: build
+  # deploy:
+  #   name: Deploy
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@main
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@main
+  #       with:
+  #         name: build
+  #         path: build
+  #     - name: Deploy to Firebase
+  #       uses: w9jds/firebase-action@master
+  #       with:
+  #         args: deploy --only hosting
+  #       env:
+  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #     - name: get-npm-version
+  #       id: package-version
+  #       uses: martinbeentjes/npm-get-version-action@master
+  #       env:
+  #         LAST_VERSION: "${{ steps.package-version.outputs.current-version}}"
+  #     - name: send message to discord
+  #       uses: appleboy/discord-action@master
+  #       with:
+  #         webhook_id: ${{ secrets.WEBHOOK_ID }}
+  #         webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+  #         color: "#48f442"
+  #         username: "GitHub Bot"
+  #         message: " ${{ env.LAST_VERSION}} Deploy de la version ${{ steps.package-version.outputs.current-version}} completado correctamente perreque"
