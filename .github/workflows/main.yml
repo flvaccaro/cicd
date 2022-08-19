@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - masterPrueba3
+    - masterPrueba4
 
 jobs:
   pull-request:
@@ -13,4 +13,8 @@ jobs:
       with:
         destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Install dependencies
+      run: npm ci
+    - name: Build dependencies
+      run: npm run build
   
