@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - '**'
+    - pruebaPR4
 
 jobs:
   pull-request:
@@ -17,3 +17,4 @@ jobs:
       run: npm ci
     - name: Build dependencies
       run: npm run build
+  
