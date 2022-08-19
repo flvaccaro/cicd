@@ -12,7 +12,7 @@ jobs:
       run: npm ci
     - name: Build dependencies
       run: npm run build
-      # uses: repo-sync/pull-request@v2
-      # with:
-      #   destination_branch: "master"
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "master"
   
