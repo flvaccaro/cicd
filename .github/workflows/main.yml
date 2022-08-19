@@ -1,8 +1,7 @@
 on:
   push:
-  pull_request:
     branches:
-      - master
+    - pruebaPR4
 
 jobs:
   pull-request:
