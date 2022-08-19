@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - masterPrueba
+    - '**'
 
 jobs:
   pull-request:
