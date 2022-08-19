@@ -1,18 +1,16 @@
 on:
   push:
     branches:
-    - '**'
+    - masterPrueba2
 
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: pull-request-check
-      run: npm ci
-    - name: Build dependencies
-      run: npm run build
+    - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "master"
+        destination_branch: "main"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
   
