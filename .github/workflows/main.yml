@@ -8,8 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: pull-request
-      uses: repo-sync/pull-request@v2
-      with:
-        destination_branch: "master"
+    - name: pull-request-check
+      run: npm ci
+    - name: Build dependencies
+      run: npm run build
+      # uses: repo-sync/pull-request@v2
+      # with:
+      #   destination_branch: "master"
   
